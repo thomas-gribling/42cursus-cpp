@@ -1,7 +1,5 @@
 NAME = megaphone
 
-INCLUDE = ./
-
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 
@@ -9,12 +7,12 @@ FILES = megaphone.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@ -I $(INCLUDE)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $@
 
 clean:
 	rm -rf $(OBJECTS)
