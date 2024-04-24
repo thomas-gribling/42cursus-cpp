@@ -5,7 +5,7 @@ INCLUDE = ./
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = main.cpp
+FILES = main.cpp Contact.cpp PhoneBook.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
 %.o: %.c

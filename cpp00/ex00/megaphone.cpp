@@ -12,6 +12,6 @@ int	main(int ac, char **av) {
 				std::cout << (char)toupper(curr[j]);
 		}
 	}
-	std::cout << '\n';
+	std::cout << std::endl;
 	return 0;
 }
