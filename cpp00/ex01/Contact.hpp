@@ -12,7 +12,7 @@ class Contact {
 		std::string	nickname;
 		std::string	phone_number;
 		std::string	darkest_secret;
-		void	ft_print();
+		void	ft_print(int id);
 };
 
 #endif

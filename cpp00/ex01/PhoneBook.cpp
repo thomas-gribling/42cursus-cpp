@@ -11,7 +11,7 @@ PhoneBook::~PhoneBook() {
 int	PhoneBook::add_contact() {
 	Contact	cont;
 
-	std::cout << "To add a contact, please provide following informations\nFirst name: ";
+	std::cout << "To add a contact, please provide the following informations\nFirst name: ";
 	getline(std::cin, cont.first_name);
 	if (cont.first_name.empty())
 		return 1;
@@ -47,31 +47,31 @@ void	PhoneBook::ft_print() {
 		std::cout << "Your Phone Book is empty! Use 'ADD' command to add some contacts." << std::endl;
 	else {
 		std::cout << "_____________________________________________" << std::endl;
-		std::cout << "|INDEX     |FIRST NAME|LAST NAME |NICKNAME  |" << std::endl;
+		std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
 		for (int i = 0; i < size; i++) {
 			std::cout << "|" << std::setw(10);
-			std::cout << std::left << i;
+			std::cout << i;
 			curr = contacts[i].first_name;
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
 			}
 			std::cout << "|" << std::setw(10);
-			std::cout << std::left << curr;
+			std::cout << curr;
 			curr = contacts[i].last_name;
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
 			}
 			std::cout << "|" << std::setw(10);
-			std::cout << std::left << contacts[i].last_name;
+			std::cout << curr;
 			curr = contacts[i].nickname;
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
 			}
 			std::cout << "|" << std::setw(10);
-			std::cout << std::left << contacts[i].nickname;
+			std::cout << curr;
 			std::cout << "|" << std::endl;
 		}
 	}

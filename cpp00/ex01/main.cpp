@@ -21,7 +21,7 @@ int	main() {
 				getline(std::cin, line);
 				index = atoi(line.c_str());
 				if (index >= 0 && index < book.size)
-					book.contacts[index].ft_print();
+					book.contacts[index].ft_print(index);
 				else // also check if it contains non numeric
 					std::cout << "Error: index out of range!" << std::endl;
 			}
