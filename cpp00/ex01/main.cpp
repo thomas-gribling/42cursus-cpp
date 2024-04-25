@@ -24,7 +24,7 @@ int	main() {
 			book.ft_print();
 			std::cout << std::endl;
 
-			if (book.get_size()) {
+			if (book.get_size()) { // just check if it's a number (atoi = 0 si pas nombre)
 				std::cout << "Please enter the index of the wanted contact: ";
 				getline(std::cin, line);
 				index = atoi(line.c_str());
