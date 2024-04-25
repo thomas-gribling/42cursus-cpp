@@ -80,9 +80,9 @@ void	PhoneBook::ft_print() {
 }
 
 Contact	PhoneBook::get_contact(int index) {
-	return (contacts[index]);
+	return contacts[index];
 }
 
 int		PhoneBook::get_size() {
-	return (size);
+	return size;
 }
