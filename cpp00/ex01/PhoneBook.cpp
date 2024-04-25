@@ -48,7 +48,6 @@ void	PhoneBook::ft_print() {
 	if (!_size)
 		std::cout << "Your Phone Book is empty! Use 'ADD' command to add some contacts." << std::endl;
 	else {
-		std::cout << "_____________________________________________" << std::endl;
 		std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
 		for (int i = 0; i < _size; i++) {
 			std::cout << "|" << std::setw(10);
