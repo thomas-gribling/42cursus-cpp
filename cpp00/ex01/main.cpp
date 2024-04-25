@@ -3,6 +3,7 @@
 int	main() {
 	std::string	line;
 	int			index;
+	int			isnum = 1;
 	PhoneBook	book;
 
 	while (line != "EXIT") {
@@ -19,11 +20,17 @@ int	main() {
 			if (book.get_size()) {
 				std::cout << "Please enter the index of the wanted contact: ";
 				getline(std::cin, line);
-				index = atoi(line.c_str());
-				if (index >= 0 && index < book.get_size())
-					book.get_contact(index).ft_print(index);
-				else // also check if it contains non numeric
-					std::cout << "Error: index out of range!" << std::endl;
+				for (int i = 0; i < line.length() && isnum; i++)
+					isnum = isdigit((int)line[i]);
+				if (!isnum)
+					std::cout << "Error: index must be a positive number!" << std::endl;
+				else {
+					index = atoi(line.c_str());
+					if (index >= 0 && index < book.get_size())
+						book.get_contact(index).ft_print(index);
+					else
+						std::cout << "Error: index out of range!" << std::endl;
+				}
 			}
 		}
 	}
