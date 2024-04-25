@@ -16,12 +16,12 @@ int	main() {
 		}
 		else if (line == "SEARCH") {
 			book.ft_print();
-			if (book.size) {
+			if (book.get_size()) {
 				std::cout << "Please enter the index of the wanted contact: ";
 				getline(std::cin, line);
 				index = atoi(line.c_str());
-				if (index >= 0 && index < book.size)
-					book.contacts[index].ft_print(index);
+				if (index >= 0 && index < book.get_size())
+					book.get_contact(index).ft_print(index);
 				else // also check if it contains non numeric
 					std::cout << "Error: index out of range!" << std::endl;
 			}
