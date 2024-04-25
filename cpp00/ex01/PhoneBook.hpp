@@ -5,16 +5,16 @@
 
 class PhoneBook {
 	private:
-		Contact	contacts[8];
-		int	index = 0;
-		int	size = 0;
+		Contact	_contacts[8];
+		int	_index = 0;
+		int	_size = 0;
 	
 	public:
 		PhoneBook();
 		~PhoneBook();
 		int	add_contact();
 		void	ft_print();
-		Contact	get_contact(int index);
+		Contact	get_contact(int i);
 		int		get_size();
 };
 

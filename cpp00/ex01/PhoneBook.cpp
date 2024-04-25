@@ -33,41 +33,41 @@ int	PhoneBook::add_contact() {
 	if (field[4].empty())
 		return 1;
 	cont.set_contact(field);
-	if (index == 8)
-		index = 0;
-	contacts[index] = cont;
-	index++;
-	if (size < 8)
-		size++;
+	if (_index == 8)
+		_index = 0;
+	_contacts[_index] = cont;
+	_index++;
+	if (_size < 8)
+		_size++;
 	return 0;
 }
 
 void	PhoneBook::ft_print() {
 	std::string	curr;
 
-	if (!size)
+	if (!_size)
 		std::cout << "Your Phone Book is empty! Use 'ADD' command to add some contacts." << std::endl;
 	else {
 		std::cout << "_____________________________________________" << std::endl;
 		std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < _size; i++) {
 			std::cout << "|" << std::setw(10);
 			std::cout << i;
-			curr = contacts[i].get_first_name();
+			curr = _contacts[i].get_first_name();
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
 			}
 			std::cout << "|" << std::setw(10);
 			std::cout << curr;
-			curr = contacts[i].get_last_name();
+			curr = _contacts[i].get_last_name();
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
 			}
 			std::cout << "|" << std::setw(10);
 			std::cout << curr;
-			curr = contacts[i].get_nickname();
+			curr = _contacts[i].get_nickname();
 			if (curr.length() > 10) {
 				curr.resize(9);
 				curr.resize(10, '.');
@@ -79,10 +79,10 @@ void	PhoneBook::ft_print() {
 	}
 }
 
-Contact	PhoneBook::get_contact(int index) {
-	return contacts[index];
+Contact	PhoneBook::get_contact(int i) {
+	return _contacts[i];
 }
 
 int		PhoneBook::get_size() {
-	return size;
+	return _size;
 }
