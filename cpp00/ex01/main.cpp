@@ -2,7 +2,6 @@
 
 int	main() {
 	std::string	line;
-	int			index;
 	PhoneBook	book;
 
 	std::cout << "Welcome to your AMAZING PHONEBOOK!" << std::endl;
@@ -24,16 +23,23 @@ int	main() {
 			book.ft_print();
 			std::cout << std::endl;
 
-			if (book.get_size()) { // just check if it's a number (atoi = 0 si pas nombre)
-				std::cout << "Please enter the index of the wanted contact: ";
+			if (book.get_size()) {
+				std::cout << "Please enter the index of the contact you want to see: ";
 				getline(std::cin, line);
-				index = atoi(line.c_str());
-				if (index >= 0 && index < book.get_size()) {
+				int	index = atoi(line.c_str());
+				int	check = 1;
+				for (int i = 0; i < line.length(); i++) {
+					if (!isdigit(line[i]))
+						check = 0;
+				}
+				if (!check)
+					std::cout << "Error: index is not a number!" << std::endl;
+				else if (index >= 0 && index < book.get_size()) {
 					book.get_contact(index).ft_print(index);
 					std::cout << std::endl;
 				}
 				else
-					std::cout << "Error: invalid index!" << std::endl;
+					std::cout << "Error: index out of range!" << std::endl;
 				std::cout << std::endl;
 			}
 		}
