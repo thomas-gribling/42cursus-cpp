@@ -13,7 +13,7 @@ int	putError(std::string level, std::string fstring = "") {
 	return 1;
 }
 
-void	replaceLine(std::string line, std::string s[2], std::ofstream &outfile) { //find and replace occurences in one line
+void	replaceLine(std::string line, std::string s[2], std::ofstream &outfile) {
 	size_t	i = line.find(s[0]);
 	size_t	start;
 
