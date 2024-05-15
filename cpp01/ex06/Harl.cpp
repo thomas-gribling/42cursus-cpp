@@ -29,8 +29,6 @@ int	Harl::getLevel( std::string level ) {
 }
 
 void	Harl::complainMore( std::string level ) {
-	func	funcs[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-
 	switch (getLevel(level)) {
 		case 0:
 			debug();
