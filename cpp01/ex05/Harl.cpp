@@ -18,5 +18,15 @@ void	Harl::error( void ) {
 }
 
 void	Harl::complain( std::string level ) {
-	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	std::string	names[4] = {"debug", "info", "warning", "error"};
+
+	int j = -1;
+	for (int i = 0; i < 4; i++) {
+		if (level == names[i])
+			j = i;
+	}
+	if (j > -1)
+		std::cout << "found!" << std::endl;
+	else
+		std::cout << "not found!" << std::endl;
 }
