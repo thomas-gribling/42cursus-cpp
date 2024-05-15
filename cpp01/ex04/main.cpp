@@ -1,33 +1,49 @@
 #include <iostream>
 #include <fstream>
 
+int	putError(std::string level, std::string fstring = "") {
+	if (level == "ARGS1")
+		std::cerr << "Not enough arguments!" << std::endl;
+	if (level == "ARGS2")
+		std::cerr << "Too many arguments!" << std::endl;
+	if (level == "ARGS1" || level == "ARGS2")
+		std::cerr << "Usage: ./ft_sed <file> <to_replace> <replace_with>" << std::endl;
+	if (level == "FILE")
+		std::cerr << "Error with file \"" << fstring << "\"!" << std::endl;
+	return 1;
+}
+
+std::string	replaceLine(std::string line) { //find and replace occurences in one line
+	return line;
+}
+
 int	main(int ac, char **av) {
 	if (ac < 4)
-		std::cerr << "Not enough arguments!" << std::endl;
+		return putError("ARGS1");
 	if (ac > 4)
-		std::cerr << "Too many arguments!" << std::endl;
-	if (ac != 4)
-	{
-		std::cerr << "Usage: ./ft_sed <file> <to_replace> <replace_with>" << std::endl;
-		return 1;
-	}
+		return putError("ARGS2");
+
+	std::ifstream	infile;
+	std::ofstream	outfile;
 	std::string	filename;
-	filename.assign(av[1]);
 	std::string	s[2];
+	std::string	buffer;
+
+	filename.assign(av[1]);
 	s[0].assign(av[2]);
 	s[1].assign(av[3]);
 
-	std::ifstream	infile;
-	char	*buff;
-	std::string	buffer;
 	infile.open(filename);
-	infile.read(buff, 1);
-	buffer.assign(buff);
-	infile.close();
-
-	std::ofstream	outfile;
+	if (infile.good() == false)
+		return putError("FILE", filename);
 	outfile.open(filename + ".replace");
-	outfile << buff;
+	if (outfile.good() == false)
+		return infile.close(), putError("FILE", filename + ".replace");
+	
+	while (getline(infile, buffer))
+		outfile << replaceLine(buffer) << std::endl;
+
+	infile.close();
 	outfile.close();
 	return 0;
 }
