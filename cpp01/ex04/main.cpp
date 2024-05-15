@@ -13,8 +13,18 @@ int	putError(std::string level, std::string fstring = "") {
 	return 1;
 }
 
-std::string	replaceLine(std::string line) { //find and replace occurences in one line
-	return line;
+void	replaceLine(std::string line, std::string s[2], std::ofstream &outfile) { //find and replace occurences in one line
+	size_t	i = line.find(s[0]);
+	size_t	start;
+
+	if (i == line.npos)
+		outfile << line << std::endl;
+	else {
+		outfile << line.substr(0, i);
+		outfile << s[1];
+		start = i + s[0].length();
+		replaceLine(line.substr(start), s, outfile);
+	}
 }
 
 int	main(int ac, char **av) {
@@ -22,7 +32,7 @@ int	main(int ac, char **av) {
 	std::ofstream	outfile;
 	std::string	filename;
 	std::string	s[2];
-	std::string	buffer;
+	std::string	line;
 
 	if (ac < 4)
 		return putError("ARGS1");
@@ -40,8 +50,8 @@ int	main(int ac, char **av) {
 	if (outfile.good() == false)
 		return infile.close(), putError("FILE", filename + ".replace");
 	
-	while (getline(infile, buffer))
-		outfile << replaceLine(buffer) << std::endl;
+	while (getline(infile, line))
+		replaceLine(line, s, outfile);
 
 	infile.close();
 	outfile.close();
