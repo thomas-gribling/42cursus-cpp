@@ -9,5 +9,6 @@
 # 📝 Results
 ## Rank 4
 - **CPP Module 00**: *100/100*
-- **CPP Module 01**: *Work in progress*<br>
+- **CPP Module 01**: *Awaiting correction*<br>
+- **CPP Module 02**: *Work in progress*<br>
 ...
