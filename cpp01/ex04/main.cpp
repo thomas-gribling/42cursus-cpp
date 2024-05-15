@@ -18,16 +18,16 @@ std::string	replaceLine(std::string line) { //find and replace occurences in one
 }
 
 int	main(int ac, char **av) {
-	if (ac < 4)
-		return putError("ARGS1");
-	if (ac > 4)
-		return putError("ARGS2");
-
 	std::ifstream	infile;
 	std::ofstream	outfile;
 	std::string	filename;
 	std::string	s[2];
 	std::string	buffer;
+
+	if (ac < 4)
+		return putError("ARGS1");
+	if (ac > 4)
+		return putError("ARGS2");
 
 	filename.assign(av[1]);
 	s[0].assign(av[2]);
