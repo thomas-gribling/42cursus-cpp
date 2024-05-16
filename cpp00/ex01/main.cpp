@@ -24,23 +24,23 @@ int	main() {
 			std::cout << std::endl;
 
 			if (book.get_size()) {
-				std::cout << "Please enter the index of the contact you want to see: ";
-				getline(std::cin, line);
-				int	index = atoi(line.c_str());
+				int	index = -1;
 				int	check = 1;
+				std::cout << "Please enter the index of the contact you want to see: " << std::flush;
+				std::cin >> index;
+				std::cout << index << std::endl;
 				for (int i = 0; (size_t)i < line.length(); i++) {
 					if (!isdigit(line[i]))
 						check = 0;
 				}
-				if (!check)
-					std::cout << "Error: index is not a number!" << std::endl;
-				else if (index >= 0 && index < book.get_size()) {
+				if (index >= 0 && index < book.get_size()) {
 					book.get_contact(index).ft_print(index);
 					std::cout << std::endl;
 				}
 				else
 					std::cout << "Error: index out of range!" << std::endl;
 				std::cout << std::endl;
+				std::cin.clear();
 			}
 		}
 	}
