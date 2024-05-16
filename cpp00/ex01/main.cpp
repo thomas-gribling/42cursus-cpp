@@ -28,7 +28,7 @@ int	main() {
 				getline(std::cin, line);
 				int	index = atoi(line.c_str());
 				int	check = 1;
-				for (int i = 0; i < line.length(); i++) {
+				for (int i = 0; (size_t)i < line.length(); i++) {
 					if (!isdigit(line[i]))
 						check = 0;
 				}

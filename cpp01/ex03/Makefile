@@ -3,12 +3,12 @@ NAME = small_theft_auto
 INCLUDE = ./
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 FILES = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 
 all: $(NAME)

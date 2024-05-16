@@ -1,12 +1,12 @@
 NAME = megaphone
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 FILES = megaphone.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

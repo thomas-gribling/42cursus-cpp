@@ -43,10 +43,10 @@ int	main(int ac, char **av) {
 	s[0].assign(av[2]);
 	s[1].assign(av[3]);
 
-	infile.open(filename);
+	infile.open(av[1]);
 	if (infile.good() == false)
 		return putError("FILE", filename);
-	outfile.open(filename + ".replace");
+	outfile.open((filename + ".replace").c_str());
 	if (outfile.good() == false)
 		return infile.close(), putError("FILE", filename + ".replace");
 	

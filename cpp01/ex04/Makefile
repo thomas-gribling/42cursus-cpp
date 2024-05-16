@@ -3,12 +3,12 @@ NAME = ft_sed
 INCLUDE = ./
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 FILES = main.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 
 all: $(NAME)
