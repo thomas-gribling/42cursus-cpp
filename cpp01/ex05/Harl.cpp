@@ -29,5 +29,5 @@ void	Harl::complain( std::string level ) {
 	if (j > -1)
 		(this->*funcs[j])();
 	else
-		std::cout << "[INVALID]\nWhat the hell is he even complaining about!?" << std::endl << std::endl;
+		std::cout << "[ INVALID ]\nWhat the hell is he even complaining about!?" << std::endl << std::endl;
 }
