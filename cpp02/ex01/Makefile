@@ -1,4 +1,4 @@
-NAME = fixed_basics
+NAME = fixed_ints
 
 INCLUDE = ./
 
