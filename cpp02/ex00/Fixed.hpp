@@ -7,6 +7,7 @@ class Fixed {
 	public:
 		int	value;
 		static int const	fractBits = 8;
+		
 	public:
 		Fixed();
 		Fixed(Fixed &source);

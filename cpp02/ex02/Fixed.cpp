@@ -27,9 +27,37 @@ Fixed::~Fixed() {
 
 Fixed &Fixed::operator=(Fixed const &source) {
 	//std::cout << "Copy assignment operator called" << std::endl;
-	value = source.getRawBits();
+	value = source.value;
 	return *this;
 }
+
+Fixed &Fixed::operator+(Fixed const &source) {
+	value += source.value;
+	return *this;
+}
+
+Fixed &Fixed::operator-(Fixed const &source) {
+	value -= source.value;
+	return *this;
+}
+
+Fixed &Fixed::operator*(Fixed const &source) {
+	value *= source.value;
+	return *this;
+}
+
+Fixed &Fixed::operator/(Fixed const &source) {
+	value /= source.value;
+	return *this;
+}
+
+Fixed &Fixed::operator++() {}
+
+Fixed Fixed::operator++(int) {}
+
+Fixed &Fixed::operator--() {}
+
+Fixed Fixed::operator--(int) {}
 
 bool Fixed::operator>(Fixed const &source) {
 	return value > source.value;

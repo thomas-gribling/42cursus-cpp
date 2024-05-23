@@ -8,6 +8,7 @@ class Fixed {
 	public:
 		int	value;
 		static int const	fractBits = 8;
+		
 	public:
 		Fixed();
 		Fixed(Fixed const &source);
@@ -16,6 +17,14 @@ class Fixed {
 		~Fixed();
 
 		Fixed &operator=(Fixed const &source);
+		Fixed &operator+(Fixed const &source);
+		Fixed &operator-(Fixed const &source);
+		Fixed &operator*(Fixed const &source);
+		Fixed &operator/(Fixed const &source);
+		Fixed &operator++();
+		Fixed operator++(int);
+		Fixed &operator--();
+		Fixed operator--(int);
 		bool operator>(Fixed const &source);
 		bool operator<(Fixed const &source);
 		bool operator>=(Fixed const &source);
