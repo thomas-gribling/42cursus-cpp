@@ -7,7 +7,7 @@ Fixed::Fixed() {
 
 Fixed::Fixed(Fixed const &source) {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = source;
+	value = source.value;
 }
 
 Fixed::Fixed(int const int_n) {
@@ -27,7 +27,7 @@ Fixed::~Fixed() {
 
 Fixed &Fixed::operator=(Fixed const &source) {
 	std::cout << "Copy assignment operator called" << std::endl;
-	value = source.getRawBits();
+	value = source.value;
 	return *this;
 }
 
@@ -47,7 +47,7 @@ float	Fixed::toFloat( void ) const {
 }
 
 int	Fixed::toInt( void ) const {
-	return (int)(value / pow(2, fractBits));
+	return value / pow(2, fractBits);
 }
 
 
