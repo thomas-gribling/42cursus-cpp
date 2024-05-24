@@ -46,6 +46,46 @@ Fixed &Fixed::operator/(Fixed const &source) {
 	value = roundf((this->toFloat() / source.toFloat()) * pow(2, fractBits));
 	return *this;
 }
+Fixed &Fixed::operator++() {
+	value++;
+	return *this;
+}
+Fixed Fixed::operator++(int) {
+	Fixed	tmp;
+
+	tmp.value = value;
+	value++;
+	return tmp;
+}
+Fixed &Fixed::operator--() {
+	value--;
+	return *this;
+}
+Fixed Fixed::operator--(int) {
+	Fixed	tmp;
+
+	tmp.value = value;
+	value--;
+	return tmp;
+}
+bool Fixed::operator>(Fixed const &source) {
+	return value > source.value;
+}
+bool Fixed::operator<(Fixed const &source) {
+	return value < source.value;
+}
+bool Fixed::operator>=(Fixed const &source) {
+	return value >= source.value;
+}
+bool Fixed::operator<=(Fixed const &source) {
+	return value <= source.value;
+}
+bool Fixed::operator==(Fixed const &source) {
+	return value == source.value;
+}
+bool Fixed::operator!=(Fixed const &source) {
+	return value != source.value;
+}
 
 
 int	Fixed::getRawBits( void ) const {
@@ -64,6 +104,27 @@ float	Fixed::toFloat( void ) const {
 
 int	Fixed::toInt( void ) const {
 	return value / pow(2, fractBits);
+}
+
+Fixed &Fixed::min( Fixed &a, Fixed &b ) {
+	if (a.value > b.value)
+		return b;
+	return a;
+}
+Fixed &Fixed::max( Fixed &a, Fixed &b ) {
+	if (a.value > b.value)
+		return a;
+	return b;
+}
+const Fixed &Fixed::min( const Fixed &a, const Fixed &b ) {
+	if (a.value > b.value)
+		return b;
+	return a;
+}
+const Fixed &Fixed::max( const Fixed &a, const Fixed &b ) {
+	if (a.value > b.value)
+		return a;
+	return b;
 }
 
 
