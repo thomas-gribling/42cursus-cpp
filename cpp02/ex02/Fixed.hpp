@@ -5,7 +5,7 @@
 # include <cmath>
 
 class Fixed {
-	public:
+	private:
 		int	value;
 		static int const	fractBits = 8;
 		
