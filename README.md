@@ -10,5 +10,6 @@
 ## Rank 4
 - **CPP Module 00**: *100/100*
 - **CPP Module 01**: *100/100*
-- **CPP Module 02**: *Work in progress*<br>
+- **CPP Module 02**: *100/100*
+- **CPP Module 03**: *Work in progress*<br>
 ...
