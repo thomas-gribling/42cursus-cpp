@@ -30,21 +30,29 @@ Fixed &Fixed::operator=(Fixed const &source) {
 	value = source.value;
 	return *this;
 }
-Fixed &Fixed::operator+(Fixed const &source) {
-	value += source.value;
-	return *this;
+Fixed Fixed::operator+(Fixed const &source) const {
+	Fixed tmp;
+
+	tmp.setRawBits(value + source.value);
+	return tmp;
 }
-Fixed &Fixed::operator-(Fixed const &source) {
-	value -= source.value;
-	return *this;
+Fixed Fixed::operator-(Fixed const &source) const {
+	Fixed tmp;
+
+	tmp.setRawBits(value - source.value);
+	return tmp;
 }
-Fixed &Fixed::operator*(Fixed const &source) {
-	value = roundf((this->toFloat() * source.toFloat()) * pow(2, fractBits));
-	return *this;
+Fixed Fixed::operator*(Fixed const &source) const {
+	Fixed tmp;
+
+	tmp.setRawBits(value * source.value);
+	return tmp;
 }
-Fixed &Fixed::operator/(Fixed const &source) {
-	value = roundf((this->toFloat() / source.toFloat()) * pow(2, fractBits));
-	return *this;
+Fixed Fixed::operator/(Fixed const &source) const {
+	Fixed tmp;
+
+	tmp.setRawBits(value / source.value);
+	return tmp;
 }
 Fixed &Fixed::operator++() {
 	value++;

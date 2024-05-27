@@ -17,10 +17,10 @@ class Fixed {
 		~Fixed();
 
 		Fixed &operator=(Fixed const &source);
-		Fixed &operator+(Fixed const &source);
-		Fixed &operator-(Fixed const &source);
-		Fixed &operator*(Fixed const &source);
-		Fixed &operator/(Fixed const &source);
+		Fixed operator+(Fixed const &source) const;
+		Fixed operator-(Fixed const &source) const;
+		Fixed operator*(Fixed const &source) const;
+		Fixed operator/(Fixed const &source) const;
 		Fixed &operator++(); //pre-increment
 		Fixed operator++(int); //post-increment
 		Fixed &operator--();
