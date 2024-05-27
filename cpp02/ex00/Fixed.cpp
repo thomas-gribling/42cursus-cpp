@@ -7,7 +7,7 @@ Fixed::Fixed() {
 
 Fixed::Fixed(Fixed &source) {
 	std::cout << "Copy constructor called" << std::endl;
-	value = source.value;
+	*this = source;
 }
 
 Fixed::~Fixed() {
