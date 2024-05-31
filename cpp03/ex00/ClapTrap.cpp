@@ -39,8 +39,10 @@ void ClapTrap::attack( const std::string &target ) {
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _dmg << " points of damage!" << std::endl;
 		_ep--;
 	}
+	else if (!_hp)
+		std::cout << "ClapTrap " << _name << " failed to attack, it's broken." << std::endl;
 	else
-		std::cout << "ClapTrap " << _name << " failed to attack! (broken or out of energy)" << std::endl;
+		std::cout << "ClapTrap " << _name << " failed to attack, it's out of energy." << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount ) {
@@ -61,10 +63,12 @@ void ClapTrap::takeDamage( unsigned int amount ) {
 
 void ClapTrap::beRepaired( unsigned int amount ) {
 	if (_hp && _ep) {
-		std::cout << "ClapTrap " << _name << " repaired itself, gaining " << amount << " hit points. (it now has " << _hp + amount << " hp)" << std::endl;
+		std::cout << "ClapTrap " << _name << " repaired itself, gaining " << amount << " hit points. It now has " << _hp + amount << " hp." << std::endl;
 		_ep--;
 		_hp += amount;
 	}
+	else if (!_hp)
+		std::cout << "ClapTrap " << _name << " failed to repair itself, it's broken." << std::endl;
 	else
-		std::cout << "ClapTrap " << _name << " failed to repair itself! (broken or out of energy)" << std::endl;
+		std::cout << "ClapTrap " << _name << " failed to repair itself, it's out of energy." << std::endl;
 }
