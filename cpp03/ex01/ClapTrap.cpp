@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() {
-	std::cout << "[CLAPTRAP]: " << "An unnamed trap has been placed!" << std::endl;
+	std::cout << "[CLAPTRAP]: " << "An unnamed has been placed!" << std::endl;
 	_hp = 10;
 	_ep = 10;
 	_dmg = 0;
