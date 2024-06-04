@@ -3,9 +3,14 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap {
+class ScavTrap: virtual public ClapTrap {
 	private:
 		bool _guard;
+	
+	protected:
+		const static int defaultHp = 100;
+		const static int defaultEP = 50;
+		const static int defaultDmg = 20;
 	
 	public:
 		ScavTrap();
