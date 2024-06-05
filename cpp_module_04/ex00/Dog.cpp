@@ -19,3 +19,8 @@ Dog &Dog::operator=( Dog const &src ) {
 	type = src.type;
 	return *this;
 }
+
+
+void Dog::makeSound() const {
+	std::cout << "Ouaf" << std::endl;
+}

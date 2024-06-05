@@ -19,3 +19,8 @@ Cat &Cat::operator=( Cat const &src ) {
 	type = src.type;
 	return *this;
 }
+
+
+void Cat::makeSound() const {
+	std::cout << "Miaou" << std::endl;
+}
