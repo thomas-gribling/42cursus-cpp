@@ -6,10 +6,11 @@
 class Animal {
 	protected:
 		std::string type;
-	
-	public:
+
 		Animal();
 		Animal( Animal const &src );
+	
+	public:
 		virtual ~Animal();
 
 		Animal &operator=( Animal const &src );
