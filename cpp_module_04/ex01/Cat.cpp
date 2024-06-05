@@ -8,7 +8,8 @@ Cat::Cat() {
 
 Cat::Cat( Cat const &src ): Animal( src ) {
 	std::cout << "[CAT]: copy constructor called." << std::endl;
-	*this = src;
+	type = src.type;
+	brain = new Brain(*(src.brain));
 }
 
 Cat::~Cat() {

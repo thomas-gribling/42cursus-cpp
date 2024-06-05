@@ -2,6 +2,7 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 #include "Brain.hpp"
+
 int	main () {
 	const Animal *dog = new Dog();
 	const Animal *cat = new Cat();
