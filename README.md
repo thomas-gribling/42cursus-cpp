@@ -12,4 +12,4 @@
 - **CPP Module 01**: *100/100*
 - **CPP Module 02**: *100/100*
 - **CPP Module 03**: *100/100*
-- **CPP Module 04**: *Awaiting for correction*
+- **CPP Module 04**: *100/100*
