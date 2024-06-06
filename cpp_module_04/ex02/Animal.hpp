@@ -15,7 +15,7 @@ class Animal {
 
 		Animal &operator=( Animal const &src );
 
-		virtual void makeSound() const = 0; // = 0: pure virtual, you need a subclass to use it
+		virtual void makeSound() const = 0; // = 0: pure virtual, makes this class abstract
 		std::string getType() const;
 };
 
