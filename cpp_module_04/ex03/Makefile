@@ -1,13 +1,11 @@
-NAME = Interface
+NAME = EpicRPG
 
 INCLUDE = ./
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-FILES = main.cpp AMateria.cpp Ice.cpp Cure.cpp \
-		ICharacter.cpp Character.cpp \
-		IMateriaSource.cpp MateriaSource.cpp
+FILES = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 OBJECTS = $(FILES:.cpp=.o)
 
 %.o: %.cpp

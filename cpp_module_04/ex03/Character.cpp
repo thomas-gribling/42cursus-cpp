@@ -1,23 +1,49 @@
 #include "Character.hpp"
 
-Character::Character() {}
-
-Character::Character( Character const &src ): ICharacter( src ) {
-	name = src.name;
+Character::Character() {
+	name = "MISSINGNO";
 	for (int i = 0; i < 4; i++)
-		inv[i] = src.inv[i];
+		inv[i] = 0;
 }
 
-Character::~Character() {}
+Character::Character( Character const &src ) {
+	name = src.name;
+	for (int i = 0; i < 4; i++) {
+		if (inv[i])
+			inv[i] = src.inv[i]->clone();
+		else
+			inv[i] = 0;
+	}
+}
+
+Character::Character( std::string name ) {
+	this->name = name;
+	for (int i = 0; i < 4; i++)
+		inv[i] = 0;
+}
+
+Character::~Character() {
+	for (int i = 0; i < 4; i++)
+		if (inv[i])
+			delete inv[i];
+}
 
 
 Character &Character::operator=( Character const &src ) {
 	name = src.name;
-	for (int i = 0; i < 4; i++)
-		inv[i] = src.inv[i];
+	for (int i = 0; i < 4; i++) {
+		if (inv[i])
+			inv[i] = src.inv[i]->clone();
+		else
+			inv[i] = 0;
+	}
 	return *this;
 }
 
+
+std::string const &Character::getName() const {
+	return name;
+}
 
 void Character::equip(AMateria *m) {
 	int stored = 0;
@@ -34,9 +60,9 @@ void Character::equip(AMateria *m) {
 		}
 	}
 	if (stored)
-		std::cout << "Item \"" << m->getType() << "\" stored in " << name << "'s inventory." << std::endl;
+		std::cout << "Materia \"" << m->getType() << "\" stored in " << name << "'s inventory." << std::endl;
 	else
-		std::cout << "Player " << name << "'s inventory is full!" << std::endl;
+		std::cout << name << "'s inventory is full!" << std::endl;
 }
 
 void Character::unequip(int idx) {
@@ -47,7 +73,7 @@ void Character::unequip(int idx) {
 		std::cout << "Inventory slot is empty!" << std::endl;
 
 	else {
-		std::cout << "Item \"" << inv[idx]->getType() << "\" successfully unequiped by " << name << "." << std::endl;
+		std::cout << "Materia \"" << inv[idx]->getType() << "\" successfully unequiped by " << name << "." << std::endl;
 		inv[idx] = 0;
 	}
 }

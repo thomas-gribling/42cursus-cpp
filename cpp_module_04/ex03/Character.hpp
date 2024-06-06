@@ -4,9 +4,14 @@
 # include "ICharacter.hpp"
 
 class Character: public ICharacter {
+	private:
+		std::string name;
+		AMateria *inv[4];
+
 	public:
 		Character();
 		Character( Character const &src );
+		Character( std::string name );
 		~Character();
 
 		Character &operator=( Character const &src );

@@ -3,17 +3,11 @@
 
 # include "AMateria.hpp"
 
-class ICharacter{
-	protected:
-		std::string name;
-		AMateria *inv[4];
-	
-	public:
-		ICharacter();
-		ICharacter( ICharacter const &src );
-		virtual ~ICharacter();
+class AMateria;
 
-		ICharacter &operator=( ICharacter const &src );
+class ICharacter {
+	public:
+		virtual ~ICharacter() {}
 
 		virtual std::string const &getName() const = 0;
 		virtual void equip(AMateria *m) = 0;
