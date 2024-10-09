@@ -48,11 +48,11 @@ int Form::getToExec() const {
 
 
 const char *Form::GradeTooHighException::what() const throw() {
-	return "Grade too high! (max is 1)";
+	return "Grade too high!";
 }
 
 const char *Form::GradeTooLowException::what() const throw() {
-	return "Grade too low! (min is 150)";
+	return "Grade too low!";
 }
 
 const char *Form::AlreadySignedException::what() const throw() {
