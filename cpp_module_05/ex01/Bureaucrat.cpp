@@ -39,7 +39,8 @@ void Bureaucrat::signForm( Form const &f ) const {
 		std::cout << " signed ";
 		std::cout << f.getName();
 		std::cout << "." << std::endl;
-	} else {
+	}
+	else {
 		std::cout << _name;
 		std::cout << " couldn't sign ";
 		std::cout << f.getName();

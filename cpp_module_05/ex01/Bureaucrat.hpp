@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "Form.hpp"
 
+class Form;
+
 class Bureaucrat {
 	private:
 		std::string const _name;

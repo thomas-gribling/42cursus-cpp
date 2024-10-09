@@ -15,7 +15,7 @@ Form::~Form() {}
 
 
 Form &Form::operator=( Form const &src ) {
-	*this = src;
+	(std::string)_name = src._name;
 	return *this;
 }
 
