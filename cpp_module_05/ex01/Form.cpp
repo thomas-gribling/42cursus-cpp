@@ -15,7 +15,8 @@ Form::~Form() {}
 
 
 Form &Form::operator=( Form const &src ) {
-	(std::string)_name = src._name;
+	(std::string)_name = src.getName();
+	_isSigned = src.getIsSigned();
 	return *this;
 }
 
