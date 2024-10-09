@@ -16,10 +16,9 @@ class AForm {
 		AForm();
 		AForm( AForm const &src );
 		AForm( std::string const name, int const toSign, int const toExec );
-		virtual void executeSpecial() const = 0;
 
 	public:
-		~AForm();
+		virtual ~AForm();
 
 		AForm &operator=( AForm const &src );
 
@@ -29,6 +28,7 @@ class AForm {
 		int getToSign() const;
 		int getToExec() const;
 		void execute(Bureaucrat const & executor) const;
+		virtual void executeSpecial() const = 0;
 
 		class GradeTooLowException: public std::exception {
 			virtual const char* what() const throw();

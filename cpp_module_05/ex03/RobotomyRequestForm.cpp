@@ -18,6 +18,7 @@ void RobotomyRequestForm::executeSpecial() const {
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=( RobotomyRequestForm const &src ) {
-	(std::string)_target = src._target;
+	if (this == &src)
+		return *this;
 	return *this;
 }

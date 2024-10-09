@@ -36,7 +36,8 @@ void ShrubberyCreationForm::executeSpecial() const {
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=( ShrubberyCreationForm const &src ) {
-	(std::string)_target = src._target;
+	if (this == &src)
+		return *this;
 	return *this;
 }
 

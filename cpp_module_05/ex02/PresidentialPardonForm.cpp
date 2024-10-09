@@ -13,6 +13,7 @@ void PresidentialPardonForm::executeSpecial() const {
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=( PresidentialPardonForm const &src ) {
-	(std::string)_target = src._target;
+	if (this == &src)
+		return *this;
 	return *this;
 }
