@@ -15,7 +15,7 @@ int	main() {
 		b.executeForm(f);
 	}
 	catch (std::exception &e){
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	try {
@@ -26,7 +26,7 @@ int	main() {
 		b.executeForm(f);
 	}
 	catch (std::exception &e){
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	try {
@@ -38,7 +38,7 @@ int	main() {
 		b.executeForm(f);
 	}
 	catch (std::exception &e){
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	std::cout << std::endl << "=== ROBOTOMYREQUESTFORM ===" << std::endl;
@@ -60,7 +60,7 @@ int	main() {
 		b.executeForm(f);
 	}
 	catch (std::exception &e){
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	std::cout << std::endl << "=== PRESIDENTIALPARDONFORM ===" << std::endl;
@@ -73,7 +73,7 @@ int	main() {
 		b.executeForm(f);
 	}
 	catch (std::exception &e){
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 	return 0;
