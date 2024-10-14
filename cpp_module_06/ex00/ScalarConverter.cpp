@@ -15,4 +15,6 @@ ScalarConverter &ScalarConverter::operator=( ScalarConverter const &src ) {
 }
 
 
-void ScalarConverter::convert() {}
+void ScalarConverter::convert( std::string const &input ) {
+	std::cout << input << std::endl;
+}

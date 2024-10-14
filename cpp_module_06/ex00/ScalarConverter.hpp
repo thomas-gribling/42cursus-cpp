@@ -4,14 +4,15 @@
 #include <iostream>
 
 class ScalarConverter {
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter( ScalarConverter const &src );
 		~ScalarConverter();
 
 		ScalarConverter &operator=( ScalarConverter const &src );
 
-		static void convert();
+	public:
+		static void convert( std::string const &input );
 };
 
 #endif // SCALARCONVERTER_HPP
