@@ -1,4 +1,4 @@
-NAME = NotRay_Cast
+NAME = convert
 
 INCLUDE = ./
 
