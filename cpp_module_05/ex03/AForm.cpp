@@ -27,7 +27,7 @@ void AForm::beSigned( Bureaucrat const &b ) {
 	if (b.getGrade() <= _toSign)
 		_isSigned = true;
 	else
-		throw GradeTooLowException();
+		throw GradeTooLowToActException();
 }
 
 std::string const AForm::getName() const {
@@ -52,7 +52,7 @@ void AForm::execute(Bureaucrat const & executor) const {
 	if (executor.getGrade() <= _toExec)
 		executeSpecial();
 	else
-		throw GradeTooLowException();
+		throw GradeTooLowToActException();
 }
 
 
@@ -65,11 +65,15 @@ const char *AForm::GradeTooLowException::what() const throw() {
 }
 
 const char *AForm::AlreadySignedException::what() const throw() {
-	return "Form is already signed!";
+	return "it was already signed!";
+}
+
+const char *AForm::GradeTooLowToActException::what() const throw() {
+	return "their grade was too low!";
 }
 
 const char *AForm::MustBeSignedException::what() const throw() {
-	return "Form must be signed in order to be executed!";
+	return "it wasn't signed!";
 }
 
 

@@ -9,12 +9,10 @@ int	main() {
 
 	std::cout << std::endl << "=== SHRUBBERY CREATION FORM ===" << std::endl;
 
-	f = i.makeForm("ShrubberyCreationForm", "look_boss_I_drew_a_tree");
+	f = i.makeForm("ShrubberyCreationForm", "look_boss_I_drew_a_forest");
 	try {
-		f->beSigned(b);
 		b.signForm(*f);
 		b.executeForm(*f);
-		f->execute(b);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
@@ -25,10 +23,8 @@ int	main() {
 
 	f = i.makeForm("RobotomyRequestForm", "I robot");
 	try {
-		f->beSigned(b);
 		b.signForm(*f);
 		b.executeForm(*f);
-		f->execute(b);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
@@ -39,10 +35,8 @@ int	main() {
 
 	f = i.makeForm("PresidentialPardonForm", "Mb bro");
 	try {
-		f->beSigned(b);
 		b.signForm(*f);
 		b.executeForm(*f);
-		f->execute(b);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

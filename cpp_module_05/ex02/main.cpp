@@ -11,10 +11,8 @@ int	main() {
 		Bureaucrat b("Raoul", 140);
 
 		std::cout << f << b;
-		f.beSigned(b);
 		b.signForm(f);
 		b.executeForm(f);
-		f.execute(b);
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
@@ -25,7 +23,7 @@ int	main() {
 		Bureaucrat b("Raoul", 130);
 
 		std::cout << std::endl << f << b;
-		f.execute(b);
+		b.executeForm(f);
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
@@ -36,10 +34,8 @@ int	main() {
 		Bureaucrat b("Roger", 130);
 
 		std::cout << std::endl << f << b;
-		f.beSigned(b);
 		b.signForm(f);
 		b.executeForm(f);
-		f.execute(b);
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
@@ -51,19 +47,17 @@ int	main() {
 		Bureaucrat b("Pierre-Paul Jacques", 45);
 
 		std::cout << f << b;
-		f.beSigned(b);
 		b.signForm(f);
 		b.executeForm(f);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
-		f.execute(b);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
+		b.executeForm(f);
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
@@ -75,10 +69,8 @@ int	main() {
 		Bureaucrat b("Manu", 1);
 
 		std::cout << f << b;
-		f.beSigned(b);
 		b.signForm(f);
 		b.executeForm(f);
-		f.execute(b);
 	}
 	catch (std::exception &e){
 		std::cerr << e.what() << std::endl;

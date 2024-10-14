@@ -37,6 +37,10 @@ class Form {
 		class AlreadySignedException: public std::exception {
 			virtual const char* what() const throw();
 		};
+
+		class GradeTooLowToSignException: public std::exception {
+			virtual const char* what() const throw();
+		};
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& f);

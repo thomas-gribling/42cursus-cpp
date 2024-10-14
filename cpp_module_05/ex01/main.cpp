@@ -8,7 +8,7 @@ int	main() {
 		std::cout << f;
 	}
 	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	try {
@@ -16,7 +16,7 @@ int	main() {
 		std::cout << f;
 	}
 	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	try {
@@ -24,7 +24,7 @@ int	main() {
 		std::cout << f;
 	}
 	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	std::cout << std::endl << "=== SIGNING ===" << std::endl;
@@ -32,13 +32,12 @@ int	main() {
 		Form f("Contrat", 100, 50);
 		Bureaucrat b("Patrick", 100);
 		std::cout << f << b;
-		f.beSigned(b);
 		b.signForm(f);
 		std::cout << f;
-		f.beSigned(b);
+		b.signForm(f);
 	}
 	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 	try {
@@ -46,10 +45,9 @@ int	main() {
 		Bureaucrat b("Patrick", 101);
 		std::cout << f << b;
 		b.signForm(f);
-		f.beSigned(b);
 	}
 	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 	return 0;

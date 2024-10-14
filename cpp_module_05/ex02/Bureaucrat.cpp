@@ -33,33 +33,23 @@ void Bureaucrat::decrementGrade( int amt ) {
 	_grade += amt;
 }
 
-void Bureaucrat::signForm( AForm const &f ) const {
-	if (f.getIsSigned()) {
-		std::cout << _name;
-		std::cout << " signed ";
-		std::cout << f.getName();
-		std::cout << "." << std::endl;
+void Bureaucrat::signForm( AForm &f ) const {
+	try {
+		f.beSigned(*this);
+		std::cout << _name << " signed " << f.getName() << "." << std::endl;
 	}
-	else {
-		std::cout << _name;
-		std::cout << " couldn't sign ";
-		std::cout << f.getName();
-		std::cout << " because their grade was too low." << std::endl;
-	}
+	catch (std::exception &e) {
+		std::cerr << _name << " couldn't sign " << f.getName() << " because " << e.what() << std::endl;
+	}	
 }
 
-void Bureaucrat::executeForm( AForm const &f ) const {
-	if (_grade <= f.getToExec()) {
-		std::cout << _name;
-		std::cout << " executed ";
-		std::cout << f.getName();
-		std::cout << "." << std::endl;
+void Bureaucrat::executeForm( AForm &f ) const {
+	try {
+		f.execute(*this);
+		std::cout << _name << " executed " << f.getName() << "." << std::endl;
 	}
-	else {
-		std::cout << _name;
-		std::cout << " couldn't execute ";
-		std::cout << f.getName();
-		std::cout << " because their grade was too low." << std::endl;
+	catch (std::exception &e) {
+		std::cerr << _name << " couldn't execute " << f.getName() << " because " << e.what() << std::endl;
 	}
 }
 

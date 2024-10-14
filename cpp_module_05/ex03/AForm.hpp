@@ -42,6 +42,10 @@ class AForm {
 			virtual const char* what() const throw();
 		};
 
+		class GradeTooLowToActException: public std::exception {
+			virtual const char* what() const throw();
+		};
+
 		class MustBeSignedException: public std::exception {
 			virtual const char* what() const throw();
 		};
