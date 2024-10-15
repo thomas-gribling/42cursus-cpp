@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
-#include <stdlib.h>
+#include <cstdlib>
+#include <limits>
 
 class ScalarConverter {
 	private:
@@ -24,6 +25,8 @@ class ScalarConverter {
 		static void fromFloat( std::string const &input );
 		static void fromDouble( std::string const &input );
 		static void fromSpecial( std::string const &input );
+		static void displayChar( long long tmp, char c );
+		static void displayInt( long long tmp, int i );
 
 	public:
 		static void convert( std::string const &input );

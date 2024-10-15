@@ -81,8 +81,31 @@ bool ScalarConverter::isFloat( std::string const &input ) {
 }
 
 bool ScalarConverter::isDouble( std::string const &input ) {
-	(void)input;
-	return false;
+	if (input.empty())
+		return false;
+	
+	int start = 0;
+	if (input[0] == '+' || input[0] == '-') {
+		if (input.size() == 1)
+			return false;
+		else
+			start = 1;
+	}
+
+	if (!isdigit(input[start]) || !isdigit(input[input.size() - 1]))
+		return false;
+	if (countChar(input, '.') != 1)
+		return false;
+
+	int dot = input.find('.');
+	if (!isdigit(input[dot - 1]) || !isdigit(input[dot + 1]))
+		return false;
+	
+	for (int i = start; i < (int)input.size() - 1; i++)
+		if (i != dot && !isdigit(input[i]))
+			return false;
+	
+	return true;
 }
 
 bool ScalarConverter::isSpecial( std::string const &input ) {
@@ -119,14 +142,11 @@ void ScalarConverter::fromInt( std::string const &input ) {
 	float f = static_cast<float>(i);
 	double d = static_cast<double>(i);
 
-	if (c < 0 || c > 127)
-		std::cout << "char: impossible" << std::endl;
-	else if (isprint(c))
-		std::cout << "char: '" << c << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	long long tmp = std::atoll(input.c_str());
+	displayChar(tmp, c);
+	displayInt(tmp, i);
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f" << std::endl;
 	std::cout << "double: " << d << std::endl;
 }
 
@@ -136,19 +156,26 @@ void ScalarConverter::fromFloat( std::string const &input ) {
 	int i = static_cast<int>(f);
 	double d = static_cast<double>(f);
 
-	if (c < 0 || c > 127)
-		std::cout << "char: impossible" << std::endl;
-	else if (isprint(c))
-		std::cout << "char: '" << c << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	long long tmp = std::atoll(input.c_str());
+	displayChar(tmp, c);
+	displayInt(tmp, i);
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f" << std::endl;
 	std::cout << "double: " << d << std::endl;
 }
 
 void ScalarConverter::fromDouble( std::string const &input ) {
-	(void)input;
+	double d = std::atof(input.c_str());
+	char c = static_cast<char>(d);
+	int i = static_cast<int>(d);
+	float f = static_cast<float>(d);
+
+	long long tmp = std::atoll(input.c_str());
+	displayChar(tmp, c);
+	displayInt(tmp, i);
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f" << std::endl;
+	std::cout << "double: " << d << std::endl;
 }
 
 void ScalarConverter::fromSpecial( std::string const &input ) {
@@ -168,6 +195,21 @@ void ScalarConverter::fromSpecial( std::string const &input ) {
 	}
 }
 
+void ScalarConverter::displayChar( long long tmp, char c ) {
+	if (tmp < std::numeric_limits<char>::min() || tmp > std::numeric_limits<char>::max())
+		std::cout << "char: impossible" << std::endl;
+	else if (isprint(c))
+		std::cout << "char: '" << c << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+}
+
+void ScalarConverter::displayInt( long long tmp, int i ) {
+	if (tmp < std::numeric_limits<int>::min() || tmp > std::numeric_limits<int>::max())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << i << std::endl;
+}
 
 void ScalarConverter::convert( std::string const &input ) {
 	if (isChar(input))
