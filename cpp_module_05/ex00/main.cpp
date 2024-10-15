@@ -3,7 +3,7 @@
 int	main() {
 	std::cout << std::endl << "=== CONSTRUCTOR TEST ===" << std::endl;
 	try {
-		Bureaucrat b("Micheal", 3);
+		Bureaucrat b("Howard", 3);
 		std::cout << b;
 	}
 	catch (std::exception &e) {
@@ -11,7 +11,7 @@ int	main() {
 	}
 
 	try {
-		Bureaucrat b("Micheal", 0);
+		Bureaucrat b("Howard", 0);
 		std::cout << b;
 	}
 	catch (std::exception &e) {
@@ -19,7 +19,7 @@ int	main() {
 	}
 
 	try {
-		Bureaucrat b("Micheal", 151);
+		Bureaucrat b("Howard", 151);
 		std::cout << b;
 	}
 	catch (std::exception &e) {
@@ -28,7 +28,7 @@ int	main() {
 
 	std::cout << std::endl << "=== INCREMENT TEST ===" << std::endl;
 	try {
-		Bureaucrat b("Jim", 3);
+		Bureaucrat b("Patrick taf", 3);
 		std::cout << "[BEFORE] " << b;
 		b.incrementGrade();
 		std::cout << "[INCR 1] " << b;
@@ -42,7 +42,7 @@ int	main() {
 
 	std::cout << std::endl << "=== DECREMENT TEST ===" << std::endl;
 	try {
-		Bureaucrat b("Dwight", 141);
+		Bureaucrat b("Henri", 141);
 		std::cout << "[BEFORE] " << b;
 		b.decrementGrade(9);
 		std::cout << "[DECR 9] " << b;

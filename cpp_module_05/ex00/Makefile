@@ -1,4 +1,4 @@
-NAME = TheOffice
+NAME = LeBureau
 
 INCLUDE = ./
 

@@ -30,7 +30,7 @@ int	main() {
 	std::cout << std::endl << "=== SIGNING ===" << std::endl;
 	try {
 		Form f("Contrat", 100, 50);
-		Bureaucrat b("Patrick", 100);
+		Bureaucrat b("Boris", 100);
 		std::cout << f << b;
 		b.signForm(f);
 		std::cout << f;
@@ -42,7 +42,7 @@ int	main() {
 	std::cout << std::endl;
 	try {
 		Form f("Contrat", 100, 50);
-		Bureaucrat b("Patrick", 101);
+		Bureaucrat b("Maurice", 101);
 		std::cout << f << b;
 		b.signForm(f);
 	}
