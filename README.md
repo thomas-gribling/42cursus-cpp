@@ -13,5 +13,6 @@
 - **CPP Module 02**: *100/100*
 - **CPP Module 03**: *100/100*
 - **CPP Module 04**: *100/100*
-- **CPP Module 05**: *Waiting for correction*
+## Rank 5
+- **CPP Module 05**: *100/100*
 - **CPP Module 06**: *Work in progress*
