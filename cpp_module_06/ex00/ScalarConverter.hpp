@@ -29,4 +29,6 @@ class ScalarConverter {
 		static void convert( std::string const &input );
 };
 
+int countChar( std::string const &s, char toCount );
+
 #endif // SCALARCONVERTER_HPP

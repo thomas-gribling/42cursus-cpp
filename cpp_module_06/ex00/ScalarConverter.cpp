@@ -49,8 +49,35 @@ bool ScalarConverter::isInt( std::string const &input ) {
 }
 
 bool ScalarConverter::isFloat( std::string const &input ) {
-	(void)input;
-	return false;
+	if (input.empty())
+		return false;
+	
+	int start = 0;
+	if (input[0] == '+' || input[0] == '-') {
+		if (input.size() == 1)
+			return false;
+		else
+			start = 1;
+	}
+
+	if (!isdigit(input[start]))
+		return false;
+	if (countChar(input, '.') != 1)
+		return false;
+	if (input[input.size() - 1] != 'f' && input[input.size() - 1] != 'F')
+		return false;
+	if (countChar(input, input[input.size() - 1]) != 1)
+		return false;
+
+	int dot = input.find('.');
+	if (!isdigit(input[dot - 1]) || !isdigit(input[dot + 1]))
+		return false;
+	
+	for (int i = start; i < (int)input.size() - 1; i++)
+		if (i != dot && !isdigit(input[i]))
+			return false;
+	
+	return true;
 }
 
 bool ScalarConverter::isDouble( std::string const &input ) {
@@ -104,7 +131,20 @@ void ScalarConverter::fromInt( std::string const &input ) {
 }
 
 void ScalarConverter::fromFloat( std::string const &input ) {
-	(void)input;
+	float f = std::atof(input.c_str());
+	char c = static_cast<char>(f);
+	int i = static_cast<int>(f);
+	double d = static_cast<double>(f);
+
+	if (c < 0 || c > 127)
+		std::cout << "char: impossible" << std::endl;
+	else if (isprint(c))
+		std::cout << "char: '" << c << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	std::cout << "double: " << d << std::endl;
 }
 
 void ScalarConverter::fromDouble( std::string const &input ) {
@@ -142,4 +182,12 @@ void ScalarConverter::convert( std::string const &input ) {
 		fromSpecial(input);
 	else
 		std::cerr << "Error: Invalid input!" << std::endl;
+}
+
+int countChar( std::string const &s, char toCount ) {
+	int count = 0;
+	for (int i = 0; i < (int)s.size(); i++)
+		if (s[i] == toCount)
+			count++;
+	return count;
 }
