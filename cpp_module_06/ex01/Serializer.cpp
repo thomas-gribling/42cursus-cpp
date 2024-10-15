@@ -26,5 +26,6 @@ Data* Serializer::deserialize(uintptr_t raw) {
 std::ostream& operator<<(std::ostream& os, const Data& d) {
 	os << "Name: " << d.name << std::endl;
 	os << "Age:  " << d.age << std::endl;
+	os << "Adr:  " << &d << std::endl;
 	return os;
 }
