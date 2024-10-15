@@ -199,7 +199,7 @@ void ScalarConverter::fromSpecial( std::string const &input ) {
 }
 
 void ScalarConverter::displayChar( long long tmp, char c ) {
-	if (tmp < std::numeric_limits<char>::min() || tmp > std::numeric_limits<char>::max())
+	if (tmp < 0 || tmp > 127)
 		std::cout << "char: impossible" << std::endl;
 	else if (isprint(c))
 		std::cout << "char: '" << c << "'" << std::endl;
