@@ -109,11 +109,14 @@ bool ScalarConverter::isDouble( std::string const &input ) {
 }
 
 bool ScalarConverter::isSpecial( std::string const &input ) {
+	if (input.empty())
+		return false;
+	
 	std::string inputs[6] = {"-inff", "+inff", "-inf", "+inf", "nanf", "nan"};
-
 	for (int i = 0; i < 6; i++)
 		if (input == inputs[i])
 			return true;
+	
 	return false;
 }
 
