@@ -8,7 +8,7 @@ static unsigned int randSeed()
 
 	time(&timer);
 	curr_time = localtime(&timer);
-	seed = curr_time->tm_sec * curr_time->tm_min * curr_time->tm_hour * curr_time->tm_yday;
+	seed = curr_time->tm_sec * curr_time->tm_min * curr_time->tm_hour;
 	return (seed);
 }
 
