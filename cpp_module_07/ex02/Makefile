@@ -1,4 +1,4 @@
-NAME = Iterator
+NAME = Arrays
 
 INCLUDE = ./
 
