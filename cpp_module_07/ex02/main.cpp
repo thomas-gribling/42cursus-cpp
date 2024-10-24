@@ -31,6 +31,7 @@ int main() {
 		Array<std::string> a(42);
 		
 		std::cout << a.size() << std::endl;
+		a[31] = "test";
 		std::cout << a[12] << std::endl;
 		std::cout << a[31] << std::endl;
 	}
