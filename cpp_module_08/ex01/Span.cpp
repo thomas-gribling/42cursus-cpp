@@ -49,9 +49,9 @@ int Span::longestSpan() {
 
 
 const char *Span::FullException::what() const throw() {
-	return "Span is full!";
+	return "Array is full!";
 }
 
 const char *Span::NotEnoughException::what() const throw() {
-	return "Span is not filled enough to calculate span! (it needs at least 2 elements)";
+	return "Array is not filled enough to calculate span! (it needs at least 2 elements)";
 }
