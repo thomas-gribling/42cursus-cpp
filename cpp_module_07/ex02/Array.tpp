@@ -41,7 +41,7 @@ Array<T> &Array<T>::operator=( Array const &src ) {
 
 template <typename T>
 T &Array<T>::operator[]( int i ) {
-	if (i >= (int)_len)
+	if (i >= (int)_len || i < 0)
 		throw IndexOutOfBoundsException();
 	return _arr[i];
 }
