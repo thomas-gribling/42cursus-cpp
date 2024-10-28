@@ -17,8 +17,6 @@ class BitcoinExchange {
 	public:
 		static int treatFile( std::ifstream &db, std::ifstream &in );
 		static void printLine( std::map<std::string, float> &database, std::string &date, std::string &val );
-
-		static int isDateInDB( std::map<std::string, float> &database, std::string &date );
 		static std::string getDate( std::map<std::string, float> &database, std::string &date );
 
 		class BadArgumentsException : public std::exception {

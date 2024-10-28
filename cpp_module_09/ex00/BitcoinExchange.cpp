@@ -63,18 +63,24 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	return 0;
 }
 
-int BitcoinExchange::isDateInDB( std::map<std::string, float> &database, std::string &date ) {
-	for (std::map<std::string, float>::iterator it = database.begin(); it != database.end(); it++) {
-		if (date == it->first)
-			return 1;
+void BitcoinExchange::printLine( std::map<std::string, float> &database, std::string &date, std::string &val ) {
+	/* ERRORS TO MANAGE:
+	- not a number
+	- not a positive number
+	- not in int bounds
+	*/
+	if (is_sdigitf(val)) {
+		float tmp = std::atof(val.c_str());
+		if (tmp > 1000.0f)
+			std::cout << "Error: too large number." << std::endl;
+		else
+			std::cout << date << " => " << val << " = " << tmp * database[getDate(database, date)] << std::endl;
 	}
-	return 0;
+	else
+		std::cout << "TODO ERROR" << std::endl;
 }
 
 std::string BitcoinExchange::getDate( std::map<std::string, float> &database, std::string &date ) {
-	if (isDateInDB(database, date))
-		return date;
-	
 	size_t i = date.find('-');
 	std::string tmp = date.substr(0, i);
 	int y = std::atoi(tmp.c_str());
@@ -99,25 +105,10 @@ std::string BitcoinExchange::getDate( std::map<std::string, float> &database, st
 			out = it->first;
 		if (ty == y && tm == m && td < d)
 			out = it->first;
+		if (ty == y && tm == m && td == d)
+			out = it->first;
 	}
 	return out;
-}
-
-void BitcoinExchange::printLine( std::map<std::string, float> &database, std::string &date, std::string &val ) {
-	/* ERRORS TO MANAGE:
-	- not a number
-	- not a positive number
-	- not in int bounds
-	*/
-	if (is_sdigitf(val)) {
-		float tmp = std::atof(val.c_str());
-		if (tmp > 1000.0f)
-			std::cout << "Error: too large number." << std::endl;
-		else
-			std::cout << date << " => " << val << " = " << tmp * database[getDate(database, date)] << std::endl;
-	}
-	else
-		std::cout << "TODO ERROR" << std::endl;
 }
 
 
