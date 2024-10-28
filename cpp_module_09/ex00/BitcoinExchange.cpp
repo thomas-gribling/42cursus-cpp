@@ -17,7 +17,7 @@ BitcoinExchange &BitcoinExchange::operator=( BitcoinExchange const &src ) {
 }
 
 
-// PROGRAM
+// UTILS
 static int is_sdigitf( std::string &s ) {
 	int count = 0;
 
@@ -32,6 +32,8 @@ static int is_sdigitf( std::string &s ) {
 	return 1;
 }
 
+
+// PROGRAM
 int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	std::map<std::string, float> database;
 	std::string line;
@@ -40,7 +42,7 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	while (getline(db, line)) {
 		size_t i = line.find(',');
 		if (i != std::string::npos) {
-			std::string val = line.substr(i + 1, line.size());
+			std::string val = line.substr(i + 1, line.size() - i - 1);
 			if (is_sdigitf(val))
 				database[line.substr(0, i)] = std::atof(val.c_str());
 		}
@@ -49,13 +51,9 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	// Read file and write outputs
 	while (getline(in, line)) {
 		size_t i = line.find('|');
-		if (i != std::string::npos && line.find('-') != std::string::npos) {
-			std::string val = line.substr(i + 1, line.size());
-			if (line[i + 1] == ' ')
-				val = line.substr(i + 2, line.size());
-			std::string date = line.substr(0, i);
-			if (line[i - 1] == ' ')
-				date = line.substr(0, i - 1);
+		if (i != std::string::npos) {
+			std::string date = line.substr(0, i - 1);
+			std::string val = line.substr(i + 2, line.size() - i - 2);
 			printLine(database, date, val);
 		}
 		else
