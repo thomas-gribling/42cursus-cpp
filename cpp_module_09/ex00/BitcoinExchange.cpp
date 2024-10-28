@@ -33,7 +33,7 @@ static int is_sdigitf( std::string &s ) {
 }
 
 int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
-	std::map<std::string, double> database;
+	std::map<std::string, float> database;
 	std::string line;
 
 	// Fill Database
@@ -65,15 +65,15 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	return 0;
 }
 
-int BitcoinExchange::isDateInDB( std::map<std::string, double> &database, std::string &date ) {
-	for (std::map<std::string, double>::iterator it = database.begin(); it != database.end(); it++) {
+int BitcoinExchange::isDateInDB( std::map<std::string, float> &database, std::string &date ) {
+	for (std::map<std::string, float>::iterator it = database.begin(); it != database.end(); it++) {
 		if (date == it->first)
 			return 1;
 	}
 	return 0;
 }
 
-std::string BitcoinExchange::getDate( std::map<std::string, double> &database, std::string &date ) {
+std::string BitcoinExchange::getDate( std::map<std::string, float> &database, std::string &date ) {
 	if (isDateInDB(database, date))
 		return date;
 	
@@ -86,7 +86,7 @@ std::string BitcoinExchange::getDate( std::map<std::string, double> &database, s
 	int d = std::atoi(tmp.c_str());
 
 	std::string out = date;
-	for (std::map<std::string, double>::iterator it = database.begin(); it != database.end(); it++) {
+	for (std::map<std::string, float>::iterator it = database.begin(); it != database.end(); it++) {
 		i = it->first.find('-');
 		tmp = it->first.substr(0, i);
 		int ty = std::atoi(tmp.c_str());
@@ -105,18 +105,18 @@ std::string BitcoinExchange::getDate( std::map<std::string, double> &database, s
 	return out;
 }
 
-void BitcoinExchange::printLine( std::map<std::string, double> &database, std::string &date, std::string &val ) {
+void BitcoinExchange::printLine( std::map<std::string, float> &database, std::string &date, std::string &val ) {
 	/* ERRORS TO MANAGE:
 	- not a number
 	- not a positive number
 	- not in int bounds
 	*/
 	if (is_sdigitf(val)) {
-		double tmp = std::atof(val.c_str()) * database[getDate(database, date)];
-		if (tmp >= std::numeric_limits<int>::max())
+		float tmp = std::atof(val.c_str());
+		if (tmp > 1000.0f)
 			std::cout << "Error: too large number." << std::endl;
 		else
-			std::cout << date << " => " << val << " = " << tmp << std::endl;
+			std::cout << date << " => " << val << " = " << tmp * database[getDate(database, date)] << std::endl;
 	}
 	else
 		std::cout << "TODO ERROR" << std::endl;
