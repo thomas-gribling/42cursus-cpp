@@ -39,6 +39,17 @@ int main() {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
+	std::cout << std::endl << "=== NEGATIVE INDEX ===" << std::endl;
+	try {
+		Array<int> a(3);
+
+		std::cout << a.size() << std::endl;
+		std::cout << a[-1] << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+
 	std::cout << std::endl;
 	return 0;
 }
