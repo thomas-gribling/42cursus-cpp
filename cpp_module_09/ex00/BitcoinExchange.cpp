@@ -18,8 +18,108 @@ BitcoinExchange &BitcoinExchange::operator=( BitcoinExchange const &src ) {
 
 
 // PROGRAM
-int TreatFile( std::ifstream &f ) {
-	std::map<std::string, int> values;
+static int is_sdigitf( std::string &s ) {
+	int count = 0;
+
+	for (size_t i = 0; i < s.size(); i++) {
+		if (!isdigit(s[i])) {
+			if (s[i] == '.' && i && i != s.size() - 1 && !count)
+				count++;
+			else
+				return 0;
+		}
+	}
+	return 1;
+}
+
+int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
+	std::map<std::string, double> database;
+	std::string line;
+
+	// Fill Database
+	while (getline(db, line)) {
+		size_t i = line.find(',');
+		if (i != std::string::npos) {
+			std::string val = line.substr(i + 1, line.size());
+			if (is_sdigitf(val))
+				database[line.substr(0, i)] = std::atof(val.c_str());
+		}
+	}
+
+	// Read file and write outputs
+	while (getline(in, line)) {
+		size_t i = line.find('|');
+		if (i != std::string::npos && line.find('-') != std::string::npos) {
+			std::string val = line.substr(i + 1, line.size());
+			if (line[i + 1] == ' ')
+				val = line.substr(i + 2, line.size());
+			std::string date = line.substr(0, i);
+			if (line[i - 1] == ' ')
+				date = line.substr(0, i - 1);
+			printLine(database, date, val);
+		}
+		else
+			std::cout << "Error: bad input => " << line << std::endl;
+	}
+
+	return 0;
+}
+
+int BitcoinExchange::isDateInDB( std::map<std::string, double> &database, std::string &date ) {
+	for (std::map<std::string, double>::iterator it = database.begin(); it != database.end(); it++) {
+		if (date == it->first)
+			return 1;
+	}
+	return 0;
+}
+
+std::string BitcoinExchange::getDate( std::map<std::string, double> &database, std::string &date ) {
+	if (isDateInDB(database, date))
+		return date;
+	
+	size_t i = date.find('-');
+	std::string tmp = date.substr(0, i);
+	int y = std::atoi(tmp.c_str());
+	tmp = date.substr(i + 1, 2);
+	int m = std::atoi(tmp.c_str());
+	tmp = date.substr(i + 4, 2);
+	int d = std::atoi(tmp.c_str());
+
+	std::string out = date;
+	for (std::map<std::string, double>::iterator it = database.begin(); it != database.end(); it++) {
+		i = it->first.find('-');
+		tmp = it->first.substr(0, i);
+		int ty = std::atoi(tmp.c_str());
+		tmp = it->first.substr(i + 1, 2);
+		int tm = std::atoi(tmp.c_str());
+		tmp = it->first.substr(i + 4, 2);
+		int td = std::atoi(tmp.c_str());
+
+		if (ty < y)
+			out = it->first;
+		if (ty == y && tm < m)
+			out = it->first;
+		if (ty == y && tm == m && td < d)
+			out = it->first;
+	}
+	return out;
+}
+
+void BitcoinExchange::printLine( std::map<std::string, double> &database, std::string &date, std::string &val ) {
+	/* ERRORS TO MANAGE:
+	- not a number
+	- not a positive number
+	- not in int bounds
+	*/
+	if (is_sdigitf(val)) {
+		double tmp = std::atof(val.c_str()) * database[getDate(database, date)];
+		if (tmp >= std::numeric_limits<int>::max())
+			std::cout << "Error: too large number." << std::endl;
+		else
+			std::cout << date << " => " << val << " = " << tmp << std::endl;
+	}
+	else
+		std::cout << "TODO ERROR" << std::endl;
 }
 
 
@@ -28,6 +128,9 @@ const char* BitcoinExchange::BadArgumentsException::what() const throw() {
 	return "Bad arguments!\nUsage: ./btc <input_file>";
 }
 
+const char* BitcoinExchange::FileDBOpenException::what() const throw() {
+	return "Unable to open \"data.csv\" file!";
+}
 const char* BitcoinExchange::FileOpenException::what() const throw() {
 	return "Unable to open input file!";
 }

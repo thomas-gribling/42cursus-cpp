@@ -13,17 +13,24 @@ int main(int ac, char **av) {
 		return 1;
 	(void)av;
 
-	// Open file
-	std::ifstream	f;
-	f.open(av[1]);
+	// Open files
+	std::ifstream	db;
+	std::ifstream	in;
+	db.open("data.csv");
+	in.open(av[1]);
 	try {
-		if (f.good() == false)
+		if (!db.good())
+			throw BitcoinExchange::FileDBOpenException();
+		if (!in.good())
 			throw BitcoinExchange::FileOpenException();
 	}
 	catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	f.close();
+	BitcoinExchange::treatFile(db, in);
+
+	db.close();
+	in.close();
 	return 0;
 }
