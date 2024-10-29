@@ -18,7 +18,7 @@ BitcoinExchange &BitcoinExchange::operator=( BitcoinExchange const &src ) {
 
 
 // UTILS
-static int is_sdigitf( std::string &s ) {
+static bool is_sdigitf( std::string &s ) {
 	int count = 0;
 
 	for (size_t i = 0; i < s.size(); i++) {
@@ -26,10 +26,10 @@ static int is_sdigitf( std::string &s ) {
 			if (s[i] == '.' && i && i != s.size() - 1 && !count)
 				count++;
 			else
-				return 0;
+				return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 static int countChar( std::string const &s, char toCount ) {
