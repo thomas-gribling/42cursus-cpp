@@ -29,4 +29,23 @@ class BitcoinExchange {
 		class FileOpenException : public std::exception {
 			virtual const char* what() const throw();
 		};
+
+		class NotAPositiveNumException : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class NotANumException : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class TooLargeNumException : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class DateLowException : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class DateInvalidException : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class UnknownException : public std::exception {
+			virtual const char* what() const throw();
+		};
 };

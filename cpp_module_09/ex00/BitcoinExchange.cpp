@@ -70,9 +70,9 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 			valid = 1;
 		}
 
-		if (i == 0 || i == line.size() - 1 || line[i - 1] != ' ' || line[i + 1] != ' ')
+		if (valid && (i == 0 || i == line.size() - 1 || line[i - 1] != ' ' || line[i + 1] != ' '))
 			valid = 0;
-		if (i == 1 || i == line.size() - 2 || line[i - 2] == ' ' || line[i + 2] == ' ')
+		if (valid && (i == 1 || i == line.size() - 2 || line[i - 2] == ' ' || line[i + 2] == ' '))
 			valid = 0;
 
 		if (valid) {
@@ -80,19 +80,25 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 				valid = 0;
 			if (countChar(date, '-') != 2)
 				valid = 0;
-			if (!isdigit(date[0]) || !isdigit(date[1]) || !isdigit(date[2]) || !isdigit(date[3]))
+			if (valid && (!isdigit(date[0]) || !isdigit(date[1]) || !isdigit(date[2]) || !isdigit(date[3])))
 				valid = 0;
-			if (!isdigit(date[5]) || !isdigit(date[6]) || !isdigit(date[8]) || !isdigit(date[9]))
+			if (valid && (!isdigit(date[5]) || !isdigit(date[6]) || !isdigit(date[8]) || !isdigit(date[9])))
 				valid = 0;
-			if (date[4] != '-' || date[7] != '-')
+			if (valid && (date[4] != '-' || date[7] != '-'))
 				valid = 0;
 		}
 
 		if (((!n && isdigit(line[0])) || n) && !line.empty()) {
-			if (valid)
-				printLine(database, date, val);
+			if (valid) {
+				try {
+					printLine(database, date, val);
+				}
+				catch (std::exception &e) {
+					std::cerr << "Error: " << e.what() << std::endl;
+				}
+			}
 			else
-				std::cout << "Error: bad input => " << line << std::endl;
+				std::cerr << "Error: bad input => " << line << std::endl;
 		}
 		if (line.empty())
 			std::cout << std::endl;
@@ -125,22 +131,22 @@ void BitcoinExchange::printLine( std::map<std::string, float> &database, std::st
 			std::cout << date << " => " << val << " = " << valf * database[getDate(database, date)] << std::endl;
 			break;
 		case 1:
-			std::cout << "Error: not a positive number." << std::endl;
+			throw NotAPositiveNumException();
 			break;
 		case 2:
-			std::cout << "Error: not a number." << std::endl;
+			throw NotANumException();
 			break;
 		case 3:
-			std::cout << "Error: too large number." << std::endl;
+			throw TooLargeNumException();
 			break;
 		case 4:
-			std::cout << "Error: date too low." << std::endl;
+			throw DateLowException();
 			break;
 		case 5:
-			std::cout << "Error: invalid date." << std::endl;
+			throw DateInvalidException();
 			break;
 		default:
-			std::cout << "Unitentified error." << std::endl;
+			throw UnknownException();
 	}
 }
 
@@ -195,4 +201,23 @@ const char* BitcoinExchange::FileDBOpenException::what() const throw() {
 }
 const char* BitcoinExchange::FileOpenException::what() const throw() {
 	return "Unable to open input file!";
+}
+
+const char* BitcoinExchange::NotAPositiveNumException::what() const throw() {
+	return "not a positive number.";
+}
+const char* BitcoinExchange::NotANumException::what() const throw() {
+	return "not a number.";
+}
+const char* BitcoinExchange::TooLargeNumException::what() const throw() {
+	return "too large number.";
+}
+const char* BitcoinExchange::DateLowException::what() const throw() {
+	return "date too low.";
+}
+const char* BitcoinExchange::DateInvalidException::what() const throw() {
+	return "invalid date.";
+}
+const char* BitcoinExchange::UnknownException::what() const throw() {
+	return "unknown error.";
 }

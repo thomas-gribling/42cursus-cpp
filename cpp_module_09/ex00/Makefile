@@ -3,7 +3,7 @@ NAME = btc
 INCLUDE = ./
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 FILES = main.cpp BitcoinExchange.cpp
 OBJECTS = $(FILES:.cpp=.o)

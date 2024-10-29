@@ -11,7 +11,6 @@ int main(int ac, char **av) {
 	}
 	if (ac != 2)
 		return 1;
-	(void)av;
 
 	// Open files
 	std::ifstream	db;
@@ -28,7 +27,8 @@ int main(int ac, char **av) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	BitcoinExchange::treatFile(db, in);
+	if (db.good() && in.good())
+		BitcoinExchange::treatFile(db, in);
 
 	db.close();
 	in.close();
