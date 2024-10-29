@@ -1,6 +1,6 @@
 #include "BitcoinExchange.hpp"
 
-int main(int ac, char **av) {
+int main( int ac, char **av ) {
 	// Check arguments
 	try {
 		if (ac != 2)
