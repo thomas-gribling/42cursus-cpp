@@ -16,6 +16,6 @@
 ## Rank 5
 - **CPP Module 05**: *100/100*
 - **CPP Module 06**: *100/100*
-- **CPP Module 07**: *Awaiting for correction*
+- **CPP Module 07**: *100/100*
 - **CPP Module 08**: *Awaiting for correction*
 - **CPP Module 09**: *Work in progress*
