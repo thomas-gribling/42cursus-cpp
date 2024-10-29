@@ -32,6 +32,14 @@ static int is_sdigitf( std::string &s ) {
 	return 1;
 }
 
+static int countChar( std::string const &s, char toCount ) {
+	int count = 0;
+	for (int i = 0; i < (int)s.size(); i++)
+		if (s[i] == toCount)
+			count++;
+	return count;
+}
+
 
 // PROGRAM
 int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
@@ -51,15 +59,43 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	// Read file and write outputs
 	int n = 0;
 	while (getline(in, line)) {
+		int valid = 0;
+
 		size_t i = line.find('|');
-		if (i != std::string::npos) {
-			std::string date = line.substr(0, i - 1);
-			std::string val = line.substr(i + 2, line.size() - i - 2);
-			if ((!n && isdigit(line[0])) || n)
-			printLine(database, date, val);
+		std::string date;
+		std::string val;
+		if (i != std::string::npos && i != line.size() - 1) {
+			date = line.substr(0, i - 1);
+			val = line.substr(i + 2, line.size() - i - 2);
+			valid = 1;
 		}
-		else
-			std::cout << "Error: bad input => " << line << std::endl;
+
+		if (i == 0 || i == line.size() - 1 || line[i - 1] != ' ' || line[i + 1] != ' ')
+			valid = 0;
+		if (i == 1 || i == line.size() - 2 || line[i - 2] == ' ' || line[i + 2] == ' ')
+			valid = 0;
+
+		if (valid) {
+			if (date.size() != 10)
+				valid = 0;
+			if (countChar(date, '-') != 2)
+				valid = 0;
+			if (!isdigit(date[0]) || !isdigit(date[1]) || !isdigit(date[2]) || !isdigit(date[3]))
+				valid = 0;
+			if (!isdigit(date[5]) || !isdigit(date[6]) || !isdigit(date[8]) || !isdigit(date[9]))
+				valid = 0;
+			if (date[4] != '-' || date[7] != '-')
+				valid = 0;
+		}
+
+		if (((!n && isdigit(line[0])) || n) && !line.empty()) {
+			if (valid)
+				printLine(database, date, val);
+			else
+				std::cout << "Error: bad input => " << line << std::endl;
+		}
+		if (line.empty())
+			std::cout << std::endl;
 		n++;
 	}
 
@@ -67,20 +103,37 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 }
 
 void BitcoinExchange::printLine( std::map<std::string, float> &database, std::string &date, std::string &val ) {
-	/* ERRORS TO MANAGE:
-	- not a number
-	- not a positive number
-	- not in int bounds
-	*/
-	if (is_sdigitf(val)) {
-		float tmp = std::atof(val.c_str());
-		if (tmp > 1000.0f)
+	int error = 0;
+
+	std::string tmp = val.substr(1, val.size() - 1);
+	if (!is_sdigitf(val) && is_sdigitf(tmp) && val[0] == '-')
+		error = 1;
+	if (!is_sdigitf(val) && is_sdigitf(tmp) && val[0] != '+' && val[0] != '-')
+		error = 2;
+
+	float valf = std::atof(val.c_str());
+	if (valf > 1000.0f)
+		error = 3;
+	
+	if (getDate(database, date) == "NA")
+		error = 4;
+
+	switch (error) {
+		case 0:
+			std::cout << date << " => " << val << " = " << valf * database[getDate(database, date)] << std::endl;
+			break;
+		case 1:
+			std::cout << "negative" << std::endl;
+			break;
+		case 2:
+			std::cout << "not a number" << std::endl;
+			break;
+		case 3:
 			std::cout << "Error: too large number." << std::endl;
-		else
-			std::cout << date << " => " << val << " = " << tmp * database[getDate(database, date)] << std::endl;
+			break;
+		default:
+			std::cout << "unknown" << std::endl;
 	}
-	else
-		std::cout << "TODO ERROR" << std::endl;
 }
 
 std::string BitcoinExchange::getDate( std::map<std::string, float> &database, std::string &date ) {
@@ -92,7 +145,7 @@ std::string BitcoinExchange::getDate( std::map<std::string, float> &database, st
 	tmp = date.substr(i + 4, 2);
 	int d = std::atoi(tmp.c_str());
 
-	std::string out = date;
+	std::string out = "NA";
 	for (std::map<std::string, float>::iterator it = database.begin(); it != database.end(); it++) {
 		i = it->first.find('-');
 		tmp = it->first.substr(0, i);
