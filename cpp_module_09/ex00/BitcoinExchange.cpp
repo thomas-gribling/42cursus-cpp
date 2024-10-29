@@ -49,15 +49,18 @@ int BitcoinExchange::treatFile( std::ifstream &db, std::ifstream &in ) {
 	}
 
 	// Read file and write outputs
+	int n = 0;
 	while (getline(in, line)) {
 		size_t i = line.find('|');
 		if (i != std::string::npos) {
 			std::string date = line.substr(0, i - 1);
 			std::string val = line.substr(i + 2, line.size() - i - 2);
+			if ((!n && isdigit(line[0])) || n)
 			printLine(database, date, val);
 		}
 		else
 			std::cout << "Error: bad input => " << line << std::endl;
+		n++;
 	}
 
 	return 0;
