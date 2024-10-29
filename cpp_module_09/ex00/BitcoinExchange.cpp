@@ -117,22 +117,30 @@ void BitcoinExchange::printLine( std::map<std::string, float> &database, std::st
 	
 	if (getDate(database, date) == "NA")
 		error = 4;
+	if (getDate(database, date) == "INV")
+		error = 5;
 
 	switch (error) {
 		case 0:
 			std::cout << date << " => " << val << " = " << valf * database[getDate(database, date)] << std::endl;
 			break;
 		case 1:
-			std::cout << "negative" << std::endl;
+			std::cout << "Error: not a positive number." << std::endl;
 			break;
 		case 2:
-			std::cout << "not a number" << std::endl;
+			std::cout << "Error: not a number." << std::endl;
 			break;
 		case 3:
 			std::cout << "Error: too large number." << std::endl;
 			break;
+		case 4:
+			std::cout << "Error: date too low." << std::endl;
+			break;
+		case 5:
+			std::cout << "Error: invalid date." << std::endl;
+			break;
 		default:
-			std::cout << "unknown" << std::endl;
+			std::cout << "Unitentified error." << std::endl;
 	}
 }
 
@@ -145,6 +153,15 @@ std::string BitcoinExchange::getDate( std::map<std::string, float> &database, st
 	tmp = date.substr(i + 4, 2);
 	int d = std::atoi(tmp.c_str());
 
+	if (m > 12 || d > 31 || !m || !d)
+		return "INV";
+	if (d == 31 && (m == 2 || m == 4 || m == 6 || m == 9 || m == 11))
+		return "INV";
+	if (d == 30 && m == 2)
+		return "INV";
+	if (d == 29 && m == 2 && y % 4)
+		return "INV";
+	
 	std::string out = "NA";
 	for (std::map<std::string, float>::iterator it = database.begin(); it != database.end(); it++) {
 		i = it->first.find('-');
