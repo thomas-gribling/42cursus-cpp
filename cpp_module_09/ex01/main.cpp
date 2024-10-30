@@ -16,10 +16,11 @@ int main( int ac, char **av ) {
 	exp.assign(av[1]);
 	try {
 		RPN::checkInput(exp);
+		RPN::calc(exp);
 	}
 	catch ( std::exception &e ) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	//RPN::calc(exp);
+	std::stack<int> s;
 	return 0;
 }

@@ -20,4 +20,8 @@ class RPN {
 		class BadArgumentsException : public std::exception {
 			virtual const char* what() const throw();
 		};
+
+		class ExpressionException : public std::exception {
+			virtual const char* what() const throw();
+		};
 };

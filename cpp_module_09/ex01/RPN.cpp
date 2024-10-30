@@ -18,52 +18,59 @@ RPN &RPN::operator=( RPN const &src ) {
 
 
 // UTILS
-static int isoperator( int c ) {
+static bool isoperator( int c ) {
 	if (c == '+' || c == '-' || c == '/' || c == '*')
-		return 1;
-	return 0;
+		return true;
+	return false;
 }
 
 
 // PROGRAM
 void RPN::checkInput( std::string &exp ) {
-	std::string last = "FN";
-
 	for (size_t i = 0; i < exp.size(); i++) {
 		if (!isdigit(exp[i]) && !isoperator(exp[i]) && exp[i] != ' ')
-			throw std::exception();
-		if (i == 0 && !isdigit(exp[i]))
-			throw std::exception();
-		if (i == 1 && exp[i] != ' ')
-			throw std::exception();
-		
-		if (i > 0 && i < exp.size() - 1) {
-			if ((isdigit(exp[i]) || isoperator(exp[i])) && (exp[i - 1] != ' ' || exp[i + 1] != ' '))
-				throw std::exception();
-		}
-
-		if (i > 0 && isdigit(exp[i])) {
-			if (last == "OP")
-				last = "FN";
-			else if (last == "FN")
-				last = "SN";
-			else if (last == "SN")
-				throw std::exception();
-		}
+			throw ExpressionException();
 	}
 }
 
 void RPN::calc( std::string &exp ) {
 	std::stack<int> s;
+	int n1, n2, res;
 
 	for (size_t i = 0; i < exp.size(); i++) {
-		if (i == 0)
+		if (isdigit(exp[i]))
 			s.push(exp[i] - '0');
+		if (isoperator(exp[i])) {
+			if (s.size() < 2)
+				throw ExpressionException();
+			
+			n2 = s.top();
+			s.pop();
+			n1 = s.top();
+			s.pop();
+			if (exp[i] == '+')
+				res = n1 + n2;
+			if (exp[i] == '-')
+				res = n1 - n2;
+			if (exp[i] == '/')
+				res = n1 / n2;
+			if (exp[i] == '*')
+				res = n1 * n2;
+			s.push(res);
+		}
 	}
+	if (s.size() == 1)
+		std::cout << res << std::endl;
+	else
+		throw ExpressionException();
 }
 
 
 // EXCEPTIONS
 const char* RPN::BadArgumentsException::what() const throw() {
 	return "Bad arguments!\nUsage: ./RPN <expression>";
+}
+
+const char* RPN::ExpressionException::what() const throw() {
+	return "Bad expression input!";
 }
