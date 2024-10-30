@@ -1,7 +1,25 @@
 #include "RPN.hpp"
 
 int main( int ac, char **av ) {
-	(void)ac;
-	(void)av;
+	// Check arguments
+	try {
+		if (ac != 2)
+			throw RPN::BadArgumentsException();
+	}
+	catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	if (ac != 2)
+		return 1;
+	
+	std::string exp;
+	exp.assign(av[1]);
+	try {
+		RPN::checkInput(exp);
+	}
+	catch ( std::exception &e ) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	//RPN::calc(exp);
 	return 0;
 }
