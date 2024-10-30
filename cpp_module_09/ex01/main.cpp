@@ -12,6 +12,7 @@ int main( int ac, char **av ) {
 	if (ac != 2)
 		return 1;
 	
+	// Treat expression
 	std::string exp;
 	exp.assign(av[1]);
 	try {
@@ -21,6 +22,5 @@ int main( int ac, char **av ) {
 	catch ( std::exception &e ) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	std::stack<int> s;
 	return 0;
 }
