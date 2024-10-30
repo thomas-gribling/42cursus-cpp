@@ -30,10 +30,11 @@ int Span::shortestSpan() {
 	
 	std::vector<int> tmp = _v;
 	std::sort(tmp.begin(), tmp.end());
-	int min = tmp[1] - tmp[0];
-	for (unsigned int i = 1; i < tmp.size(); i++) {
-		if (tmp[i] - tmp[i - 1] < min)
-			min = tmp[i] - tmp[i - 1];
+	int min = *(std::max_element(tmp.begin(), tmp.end()));
+	std::vector<int>::iterator prev = tmp.begin();
+	for (std::vector<int>::iterator curr = ++tmp.begin(); curr != tmp.end(); curr++) {
+		min = std::min(min, *curr - *prev);
+		prev = curr;
 	}
 	return min;
 }
@@ -42,9 +43,7 @@ int Span::longestSpan() {
 	if (_v.size() <= 1)
 		throw NotEnoughException();
 	
-	std::vector<int> tmp = _v;
-	std::sort(tmp.begin(), tmp.end());
-	return tmp[tmp.size() - 1] - tmp[0];
+	return *(std::max_element(_v.begin(), _v.end())) - *(std::min_element(_v.begin(), _v.end()));
 }
 
 

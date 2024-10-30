@@ -22,6 +22,14 @@ class Span {
 		int shortestSpan();
 		int longestSpan();
 
+		template <typename I>
+		void addNumber( I begin, I end ) {
+			while (begin != end) {
+				addNumber(*begin);
+				begin++;
+			}
+		}
+
 		class FullException : public std::exception {
 			virtual const char *what() const throw();
 		};
