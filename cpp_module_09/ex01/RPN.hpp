@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <cstdlib>
 #include <stack>
 
 class RPN {
