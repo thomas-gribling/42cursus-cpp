@@ -72,5 +72,5 @@ const char* RPN::BadArgumentsException::what() const throw() {
 }
 
 const char* RPN::ExpressionException::what() const throw() {
-	return "Bad expression input!";
+	return "Invalid expression input!";
 }
