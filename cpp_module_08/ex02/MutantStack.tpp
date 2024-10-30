@@ -7,7 +7,7 @@ MutantStack<T>::MutantStack() {}
 
 template <typename T>
 MutantStack<T>::MutantStack( MutantStack<T> const &src ) {
-	(void)src;
+	*this = src;
 }
 
 template <typename T>
@@ -16,7 +16,9 @@ MutantStack<T>::~MutantStack() {}
 
 template <typename T>
 MutantStack<T> &MutantStack<T>::operator=( MutantStack<T> const &src ) {
-	(void)src;
+	if (this != &src)
+		*this = src;
+	return *this;
 }
 
 
