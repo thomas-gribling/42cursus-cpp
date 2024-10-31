@@ -5,13 +5,14 @@
 #include <cstdlib>
 #include <vector>
 #include <list>
+#include <ctime>
 
 class PmergeMe {
 	private:
 		std::vector<int> _v;
 		std::list<int> _l;
-		unsigned int _vTime;
-		unsigned int _lTime;
+		double _vTime;
+		double _lTime;
 		size_t _len;
 
 	public:
