@@ -40,13 +40,23 @@ void PmergeMe::fillContainers( int ac, char **av ) {
 	_len = ac - 1;
 }
 
+bool PmergeMe::isSorted() {
+	std::vector<int>::iterator it = _v.begin();
+	int last = *it;
+	for (it = ++it; it != _v.end(); it++) {
+		if (*it < last)
+			return false;
+		last = *it;
+	}
+	return true;
+}
+
 void PmergeMe::printVector() {
 	for (std::vector<int>::iterator it = _v.begin(); it != _v.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 
-#include <unistd.h>
 void PmergeMe::sortVector() {
 	clock_t start = clock();
 

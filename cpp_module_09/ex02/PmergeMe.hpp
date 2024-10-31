@@ -23,6 +23,7 @@ class PmergeMe {
 		PmergeMe &operator=( PmergeMe const &src );
 
 		void fillContainers( int ac, char **av );
+		bool isSorted();
 		void printVector();
 		void sortVector();
 		void sortList();

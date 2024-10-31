@@ -13,9 +13,12 @@ int main( int ac, char **av ) {
 		return 1;
 	
 	// push_swap 2
-	PmergeMe merger;
 	try {
+		PmergeMe merger;
+		
 		merger.fillContainers(ac, av);
+		if (merger.isSorted())
+			throw PmergeMe::AlreadySortedException();
 
 		std::cout << "Before: ";
 		merger.printVector();
