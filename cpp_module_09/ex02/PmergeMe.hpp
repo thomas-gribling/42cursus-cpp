@@ -30,4 +30,11 @@ class PmergeMe {
 		class BadArgumentsException : public std::exception {
 			virtual const char *what() const throw();
 		};
+		class NANException : public std::exception {
+			virtual const char *what() const throw();
+		};
+
+		class AlreadySortedException : public std::exception {
+			virtual const char *what() const throw();
+		};
 };
