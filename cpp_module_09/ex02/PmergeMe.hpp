@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <ctime>
+#include <algorithm>
 
 class PmergeMe {
 	private:
@@ -25,6 +26,7 @@ class PmergeMe {
 		void fillContainers( int ac, char **av );
 		bool isSorted();
 		void printVector();
+		void sort();
 		void sortVector();
 		void sortList();
 		void displayTimestamps();

@@ -15,7 +15,7 @@ int main( int ac, char **av ) {
 	// push_swap 2
 	try {
 		PmergeMe merger;
-		
+
 		merger.fillContainers(ac, av);
 		if (merger.isSorted())
 			throw PmergeMe::AlreadySortedException();
@@ -23,8 +23,7 @@ int main( int ac, char **av ) {
 		std::cout << "Before: ";
 		merger.printVector();
 
-		merger.sortVector();
-		merger.sortList();
+		merger.sort();
 
 		std::cout << "After:  ";
 		merger.printVector();

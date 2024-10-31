@@ -27,6 +27,14 @@ PmergeMe &PmergeMe::operator=( PmergeMe const &src ) {
 }
 
 
+// UTILS
+void swap(int &a, int &b) {
+	int tmp = a;
+	a = b;
+	b = tmp;
+}
+
+
 // PROGRAM
 void PmergeMe::fillContainers( int ac, char **av ) {
 	for (int i = 1; i < ac; i++) {
@@ -57,21 +65,25 @@ void PmergeMe::printVector() {
 	std::cout << std::endl;
 }
 
-void PmergeMe::sortVector() {
-	clock_t start = clock();
+void PmergeMe::sort() {
+	clock_t start1 = clock();
+	sortVector();
+	_vTime = static_cast<double>(clock() - start1) / CLOCKS_PER_SEC * 1000;
 
-	_vTime = static_cast<double>(clock() - start) / CLOCKS_PER_SEC * 1000;
+	clock_t start2 = clock();
+	sortList();
+	_lTime = static_cast<double>(clock() - start2) / CLOCKS_PER_SEC * 1000;
+}
+
+void PmergeMe::sortVector() {
 }
 
 void PmergeMe::sortList() {
-	clock_t start = clock();
-
-	_lTime = static_cast<double>(clock() - start) / CLOCKS_PER_SEC * 1000;
 }
 
 void PmergeMe::displayTimestamps() {
-	std::cout << "Time to process a range of " << _len << " elements with std::vector : " << _vTime << " us" << std::endl;
-	std::cout << "Time to process a range of " << _len << " elements with std::list   : " << _lTime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _len << " elements with std::vector : " << _vTime << " ms" << std::endl;
+	std::cout << "Time to process a range of " << _len << " elements with std::list   : " << _lTime << " ms" << std::endl;
 }
 
 
