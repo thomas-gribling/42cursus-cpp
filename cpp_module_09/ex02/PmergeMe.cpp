@@ -60,15 +60,18 @@ void PmergeMe::printVector() {
 void PmergeMe::sortVector() {
 	clock_t start = clock();
 
-	clock_t end = clock();
-	_vTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000 / 2;
+	_vTime = static_cast<double>(clock() - start) / CLOCKS_PER_SEC * 1000;
 }
 
-void PmergeMe::sortList() {}
+void PmergeMe::sortList() {
+	clock_t start = clock();
+
+	_lTime = static_cast<double>(clock() - start) / CLOCKS_PER_SEC * 1000;
+}
 
 void PmergeMe::displayTimestamps() {
-	std::cout << "Time to process a range of " << _len << " elements with std::vector : " << _vTime / 100 << " ms" << std::endl;
-	std::cout << "Time to process a range of " << _len << " elements with std::list   : " << _lTime / 100 << " ms" << std::endl;
+	std::cout << "Time to process a range of " << _len << " elements with std::vector : " << _vTime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _len << " elements with std::list   : " << _lTime << " us" << std::endl;
 }
 
 
