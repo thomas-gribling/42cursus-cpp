@@ -88,7 +88,7 @@ void PmergeMe::sort() {
 	_vTime = static_cast<double>(clock() - start1) / CLOCKS_PER_SEC * 1000;
 
 	clock_t start2 = clock();
-	sortDeque(0, _d.size());
+	sortDeque(0, _d.size() - 1);
 	_dTime = static_cast<double>(clock() - start2) / CLOCKS_PER_SEC * 1000;
 }
 
