@@ -17,5 +17,5 @@
 - **CPP Module 05**: *100/100*
 - **CPP Module 06**: *100/100*
 - **CPP Module 07**: *100/100*
-- **CPP Module 08**: *Awaiting for correction*
-- **CPP Module 09**: *Work in progress*
+- **CPP Module 08**: *100/100*
+- **CPP Module 09**: *100/100*
