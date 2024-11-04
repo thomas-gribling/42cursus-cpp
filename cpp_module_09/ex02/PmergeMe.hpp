@@ -4,16 +4,17 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <vector>
-#include <list>
+#include <deque>
 #include <ctime>
 #include <algorithm>
+#include <limits>
 
 class PmergeMe {
 	private:
 		std::vector<int> _v;
-		std::list<int> _l;
+		std::deque<int> _d;
 		double _vTime;
-		double _lTime;
+		double _dTime;
 		size_t _len;
 
 	public:
@@ -26,10 +27,15 @@ class PmergeMe {
 		void fillContainers( int ac, char **av );
 		bool isSorted();
 		void printVector();
-		void sort();
-		void sortVector();
-		void sortList();
 		void displayTimestamps();
+
+		void sort();
+		void sortVector( int begin, int end );
+		void mergeVector( int begin, int middle, int end );
+		void insertVector( int begin, int end );
+		void sortDeque( int begin, int end );
+		void mergeDeque( int begin, int middle, int end );
+		void insertDeque( int begin, int end );
 
 		class BadArgumentsException : public std::exception {
 			virtual const char *what() const throw();
@@ -37,8 +43,14 @@ class PmergeMe {
 		class NANException : public std::exception {
 			virtual const char *what() const throw();
 		};
+		class IntException : public std::exception {
+			virtual const char *what() const throw();
+		};
 
 		class AlreadySortedException : public std::exception {
+			virtual const char *what() const throw();
+		};
+		class NotSortedException : public std::exception {
 			virtual const char *what() const throw();
 		};
 };
